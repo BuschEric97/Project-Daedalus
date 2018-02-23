@@ -1,12 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/* Project-Daedalus
+ *
+ * Digital Tabletop map utility with token integration
  */
 
 /**
- *
- * @author Chris
+ * @author Christopher Nguyen
+ *          Eric Busch
+ *          Tyler Eley
+ *          William H
  */
 public class Main {
 
