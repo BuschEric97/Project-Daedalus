@@ -10,12 +10,13 @@
  */
 import javax.swing.*;
 import java.awt.*;
+import java.util.Scanner;
 
 public class Main
 {
     // @param args the command line arguments
     public static void main(String[] args)
-    {
+    {   
         Dimension screen = java.awt.Toolkit.getDefaultToolkit().getScreenSize(); // get screen dimensions
         int pixelHeight = (int) screen.getHeight(); // get the screen's height and cast it to int
         int pixelWidth = (int) screen.getWidth(); // get the screen's width and cast it to int
@@ -29,5 +30,15 @@ public class Main
         f.setUndecorated(true); // remove the title bar
         f.setVisible(true); // make the board visible
         f.addMouseListener(new MouseInput()); // add mouse listener
+    }
+    
+    public double getDiagScreenSize()
+    {
+        Scanner input = new Scanner(System.in);
+        
+        System.out.println("Please enter diagonal monitor size: ");
+        double diagSize = input.nextDouble();
+        
+        return diagSize;
     }
 }
