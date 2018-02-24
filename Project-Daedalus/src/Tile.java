@@ -13,6 +13,9 @@
  *          William Hopkins
  */
 import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+import javax.imageio.*;
 
 public class Tile
 {
@@ -31,6 +34,11 @@ public class Tile
     {   return map; }
     public void setMap( Image m )
     {   map = m;    }
+    public void setMap( String s )
+    {
+        try {  map = ImageIO.read( new File( s ) ); }
+        catch ( IOException ex ) {   }
+    }
     public Token getToken()
     {   return token;   }
     public void setToken( Token t )
