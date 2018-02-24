@@ -1,10 +1,8 @@
 /* Project-Daedalus
- *
- * Digital Tabletop map utility with token integration
- *
- * This class contains the image for the map tile and a token on it.
- *
- */
+    This class contains the image for the map tile and a token on it.
+    It does not combine the two into an image within it, as tokens may
+    move.
+*/
 
 /**
  * @author Christopher Nguyen
