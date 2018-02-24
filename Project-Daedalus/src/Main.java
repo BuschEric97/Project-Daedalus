@@ -21,5 +21,4 @@ public class Main
         f.setVisible(true); // make the board visible
         f.addMouseListener(new MouseInput()); // add mouse listener
     }
-    
 }
