@@ -1,6 +1,9 @@
 /* Project-Daedalus
  *
  * Digital Tabletop map utility with token integration
+ *
+ * This class contains the image for the map tile and a token on it.
+ *
  */
 
 /**
@@ -9,24 +12,25 @@
  *          Tyler Eley
  *          William Hopkins
  */
+import java.awt.Image;
 
 public class Tile
 {
     // PARAMETERS
-    // Image map;
+    Image map;
     Token token;
     
     public Tile()
     {
-        //map = null;
+        map = null;
         token = null;
     }
     
     // ACCESSORS
-    /* public Image getMap()
+    public Image getMap()
     {   return map; }
     public void setMap( Image m )
-    {   map = m;    }*/
+    {   map = m;    }
     public Token getToken()
     {   return token;   }
     public void setToken( Token t )
