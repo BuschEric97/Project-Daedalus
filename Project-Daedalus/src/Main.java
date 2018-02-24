@@ -1,15 +1,17 @@
 /* Project-Daedalus
- *
- * Digital Tabletop map utility with token integration
- */
+    Digital Tabletop map utility with token integration
+*/
 
 /**
  * @author Christopher Nguyen
  *          Eric Busch
  *          Tyler Eley
- *          William H
+ *          William Hopkins
  */
-public class Main {
+import javax.swing.*;
+
+public class Main
+{
 
     /**
      * @param args the command line arguments
