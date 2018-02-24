@@ -1,13 +1,14 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+    This is the token interface for the player tokens.
+    It is a generalized player token so that we can
+    implement player tokens from different tabletop games
+*/
 
-/**
- *
- * @author Cytus
- */
-public interface Token {
+import javax.swing.*;
+
+public interface Token
+{
+    //implement image variable
     
+    public String DisplayStats();
 }
