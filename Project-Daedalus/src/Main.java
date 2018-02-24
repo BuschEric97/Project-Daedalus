@@ -22,10 +22,15 @@ public class Main
         int pixelWidth = (int) screen.getWidth(); // get the screen's width and cast it to int
         int ppi = java.awt.Toolkit.getDefaultToolkit().getScreenResolution();
         
+        TileBorder sqr = new TileBorder(ppi, 20, 20); // test tile
+        
         System.out.println("Screen Height: " + pixelHeight); // print the screen's height
         System.out.println("Screen Width: " + pixelWidth); // print the screen's width
         
         JFrame f = new JFrame("Game Board"); // create new JFrame
+        
+        f.add(sqr); // add the test tile to the frame
+        
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // set the JFrame close operation to exit with the X button
         f.setSize(pixelWidth, pixelHeight); // set JFrame window size to monitor's size
         f.setUndecorated(true); // remove the title bar
