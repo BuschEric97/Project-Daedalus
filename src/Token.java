@@ -10,10 +10,8 @@
  *          Tyler Eley
  *          William Hopkins
  */
-import java.awt.Image;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.*;
+import java.awt.*;
+import javax.swing.*;
 
 public abstract class Token
 {
@@ -27,8 +25,12 @@ public abstract class Token
     {   token = t;  }
     public void setMap( String s )
     {
-        try {  token = ImageIO.read( new File( s ) ); }
-        catch ( IOException ex ) {   }
+        ImageIcon icon = null;
+        java.net.URL imgURL = getClass().getClassLoader().getResource(s);
+        if ( imgURL != null )
+            return;
+        icon = new ImageIcon(imgURL);
+        token = icon.getImage();
     }
     
     // METHODS

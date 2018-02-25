@@ -11,9 +11,6 @@
  *          William Hopkins
  */
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.*;
 import javax.swing.*;
 
 public class Tile extends JPanel
@@ -52,8 +49,12 @@ public class Tile extends JPanel
     {   map = m;    }
     public void setMap( String s )
     {
-        try {  map = ImageIO.read( new File( s ) ); }
-        catch ( IOException ex ) {   }
+        ImageIcon icon = null;
+        java.net.URL imgURL = getClass().getClassLoader().getResource(s);
+        if ( imgURL == null )
+            return;
+        icon = new ImageIcon(imgURL);
+        map = icon.getImage();
     }
     public Token getToken()
     {   return token;   }
