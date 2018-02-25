@@ -44,8 +44,11 @@ public class Main extends JFrame
         f.pack();
         f.addMouseListener(new MouseInput(marginSize, mapArray)); // add mouse listener
         f.setVisible(true); // make the board visible
-        Canvas c = new Canvas( mapArray );
-        f.add( c );
+        Canvas canvas = new Canvas( mapArray );
+        for( int r = 0; r < mapArray.length; r++)
+            for( int c = 0; c < mapArray[0].length; c++ )
+                mapArray[r][c].setMap("/img/grass.png");
+        f.add( canvas );
         f.repaint();
     }
     
@@ -75,6 +78,17 @@ public class Main extends JFrame
             g.fillRect(0, screenHeight-marginSize, screenWidth, marginSize);
             g.fillRect(screenWidth-marginSize, 0, marginSize, screenHeight);
             g.setColor( Color.RED );
+            for( int r = 0; r < mapArray.length; r++)
+                for( int c = 0; c < mapArray[0].length; c++ )
+                {
+                    if ( mapArray[r][c].getMap() != null )
+                    {
+                        g.drawImage( mapArray[r][c].getMap(),
+                                     mapArray[r][c].getTopLeftX(),
+                                     mapArray[r][c].getTopLeftY(),
+                                     null);
+                    }
+                }
             g.fillRect(0, 0, marginSize, marginSize);
         }
     }
