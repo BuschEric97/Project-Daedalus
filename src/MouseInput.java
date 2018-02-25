@@ -1,6 +1,23 @@
 /*
  * Program by: Eric Busch
- */
+ *##DESCRIPTION: Uses mouse events and listeners to get user input from the mouse.
+ * 
+ *###METHODS USED:
+ * ####mouseClicked(MouseEvent me)
+ *      Triggered when the mouse is clicked.
+ *      
+ * ####mousePressed(MouseEvent me)
+ *      Triggered when any mouse button is pressed
+ * 
+ *  ####mouseReleased(MouseEvent me)
+ *      Triggered when a mouse button is released
+ * 
+ * ####mouseEntered(MouseEvent me)
+ *      Triggered when the mouse enters the screen
+ * 
+ *  ####mouseExited(MouseEvent me)
+ *      Triggered when the mouse exits the screen
+*/
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
