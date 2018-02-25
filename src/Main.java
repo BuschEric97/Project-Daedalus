@@ -69,7 +69,7 @@ public class Main extends JFrame
         // Action Listeners
         f.addMouseListener(new MouseListener()
         {
-            int button; // -1 = none, 0 = exit, 1 = array
+            int button; // -1 = none, 0 = exit, 1 = array, 2 = add token
             int startX; // x coordinate for token to be moved
             int startY; // y coordinate for token to be moved
             int endX; // x coordinate for tile to move token to
@@ -82,7 +82,7 @@ public class Main extends JFrame
       		int x = e.getX(); // get the X coordinate of the mouse click
                 int y = e.getY(); // get the Y coordinate of the mouse click
                 button = -1;
-                if ( x < marginSize && y < marginSize) // click starts on the exit button
+                if ( x < marginSize && y < marginSize ) // click starts on the exit button
                 {
                     button = 0;
                 } else if ( x > marginSize && x < marginSize+mapArray[0].length*ppi &&
@@ -91,6 +91,9 @@ public class Main extends JFrame
                     button = 1;
                     startX = x / ppi; // use integer division to determine the x coordinate (in the array) of the cell clicked
                     startY = y / ppi; // use integer division to determine the y coordinate (in the array) of the cell clicked
+                } else if ( x < marginSize && y < 2*marginSize )
+                {
+                    button = 2;
                 }
                 f.repaint();
             }
@@ -106,16 +109,35 @@ public class Main extends JFrame
                             y > marginSize && y < marginSize+mapArray.length*ppi &&
                             button == 1 ) // click starts and ends in the array
                 {
+                    
                     endX = x / ppi; // use integer division to determine the x coordinate (in the array) of the cell clicked
                     endY = y / ppi; // use integer division to determine the y coordinate (in the array) of the cell clicked
+                    if ( startX == endX && startY == endY ) // if the click in the array ends on the same index
+                    {
+                        System.out.println("Tooltip");
+                        repaint();
+                        return;
+                    }
                     System.out.println("User started in cell: (" + startX + ", " + startY + ")"); // print coordinates (in the array) of mouse click to console
                     System.out.println("User ended in cell: (" + endX + ", " + endY + ")"); // print coordinates (in the array) of mouse click to console
-                    if ( mapArray[startX][startY].getToken() != null && mapArray[endX][endY].getToken() == null )
+                    if ( mapArray[startY][startX].getToken() != null && mapArray[endY][endX].getToken() == null )
                     {
-                        mapArray[endX][endY].setToken( mapArray[startX][startY].getToken() );
-                        mapArray[startX][startY].setToken( null );
+                        mapArray[endY][endX].setToken( mapArray[startY][startX].getToken() );
+                        mapArray[startY][startX].setToken( null );
                         System.out.println("Token moved.");
                     }
+                } else if ( x < marginSize && y < 2*marginSize && button == 2 )
+                {
+                    System.out.println("Adding Token");
+                    for ( int r = 0; r < mapArray.length; r++ )
+                        for ( int c = 0; c < mapArray[0].length; c++ )
+                            if ( mapArray[r][c].getToken() == null )
+                            {
+                                mapArray[r][c].setToken( new DnDToken() );
+                                mapArray[r][c].getToken().setMap("blank.png");
+                                f.repaint();
+                                return;
+                            }
                 }
                 f.repaint();
             }
