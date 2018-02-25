@@ -69,57 +69,56 @@ public class Main extends JFrame
         // Action Listeners
         f.addMouseListener(new MouseListener()
         {
-            boolean tokenSelected = false; // boolean variable to determine which coordinate variables to record into
-            int tokenToMoveX; // x coordinate for token to be moved
-            int tokenToMoveY; // y coordinate for token to be moved
-            int moveTokenToX; // x coordinate for tile to move token to
-            int moveTokenToY; // y coordinate for tile to move token to
-            public void mouseClicked(MouseEvent me)
+            int button; // -1 = none, 0 = exit, 1 = array
+            int startX; // x coordinate for token to be moved
+            int startY; // y coordinate for token to be moved
+            int endX; // x coordinate for tile to move token to
+            int endY; // y coordinate for tile to move token to
+            @Override
+            public void mouseClicked(MouseEvent e) { }
+            @Override
+            public void mousePressed(MouseEvent e)
             {
-                f.repaint();
-                int mx = me.getX(); // get the X coordinate of the mouse click
-                int my = me.getY(); // get the Y coordinate of the mouse click
-                int cellWidth; // variable for x coordinate of the cell if the user clicked on the grid
-                int cellHeight; // variable for y coordinate of the cell if the user clicked on the grid
-
-                if (mx < marginSize && my < marginSize)
-                    System.exit(0); // quit the program if the user clicks the top left of the screen
-
-                if (mx < marginSize || my < marginSize || mx > (screenWidth - marginSize) || my > (screenHeight - marginSize))
-                    System.out.println("User clicked at position: (" + mx + ", " + my + ")"); // print coordinates (in pixels) of mouse click to console
-                else
+      		int x = e.getX(); // get the X coordinate of the mouse click
+                int y = e.getY(); // get the Y coordinate of the mouse click
+                button = -1;
+                if ( x < marginSize && y < marginSize) // click starts on the exit button
                 {
-                    cellWidth = mx / ppi; // use integer division to determine the x coordinate (in the array) of the cell clicked
-                    cellHeight = my / ppi; // use integer division to determine the y coordinate (in the array) of the cell clicked
-                    System.out.println("User clicked in cell: (" + cellWidth + ", " + cellHeight + ")"); // print coordinates (in the array) of mouse click to console
-
-                    if (!tokenSelected)
-                    {
-                        tokenToMoveX = cellWidth; // set the x coordinate of the cell clicked
-                        tokenToMoveY = cellHeight; // set the y coordinate of the cell clicked
-                        tokenSelected = true; // set tokenSelected to true for next iteration
-                    }
-                    else
-                    {
-                        moveTokenToX = cellWidth; // set the x coordinate of the cell
-                        moveTokenToY = cellHeight; // set the y coordinate of the cell
-                        tokenSelected = false; // set tokenSelected back to false for next iteration
-
-                        if (mapArray[moveTokenToY][moveTokenToX].getToken() == null) // check that target cell is empty
-                        {
-                            mapArray[moveTokenToY][moveTokenToX].setToken(mapArray[tokenToMoveY][tokenToMoveX].getToken()); // copy the selected token into its new position
-                            mapArray[tokenToMoveY][tokenToMoveX].setToken(null); // delete the selected token from its old position
-                        }
-                        else
-                            System.err.println("error: target cell is not empty!"); // if target cell is not empty, print an error message
-                    }
-                    f.repaint();
+                    button = 0;
+                } else if ( x > marginSize && x < marginSize+mapArray[0].length*ppi &&
+                            y > marginSize && y < marginSize+mapArray.length*ppi ) // click starts in the array
+                {
+                    button = 1;
+                    startX = x / ppi; // use integer division to determine the x coordinate (in the array) of the cell clicked
+                    startY = y / ppi; // use integer division to determine the y coordinate (in the array) of the cell clicked
                 }
+                f.repaint();
             }
             @Override
-            public void mousePressed(MouseEvent e) { }
-            @Override
-            public void mouseReleased(MouseEvent e) { }
+            public void mouseReleased(MouseEvent e)
+            {
+      		int x = e.getX(); // get the X coordinate of the mouse click
+                int y = e.getY(); // get the Y coordinate of the mouse click
+                if ( x < marginSize && y < marginSize && button == 0 ) // click starts and ends on the exit button
+                {
+                    System.exit(0); // quit the program if the user clicks the top left of the screen
+                } else if ( x > marginSize && x < marginSize+mapArray[0].length*ppi &&
+                            y > marginSize && y < marginSize+mapArray.length*ppi &&
+                            button == 1 ) // click starts and ends in the array
+                {
+                    endX = x / ppi; // use integer division to determine the x coordinate (in the array) of the cell clicked
+                    endY = y / ppi; // use integer division to determine the y coordinate (in the array) of the cell clicked
+                    System.out.println("User started in cell: (" + startX + ", " + startY + ")"); // print coordinates (in the array) of mouse click to console
+                    System.out.println("User ended in cell: (" + endX + ", " + endY + ")"); // print coordinates (in the array) of mouse click to console
+                    if ( mapArray[startX][startY].getToken() != null && mapArray[endX][endY].getToken() == null )
+                    {
+                        mapArray[endX][endY].setToken( mapArray[startX][startY].getToken() );
+                        mapArray[startX][startY].setToken( null );
+                        System.out.println("Token moved.");
+                    }
+                }
+                f.repaint();
+            }
             @Override
             public void mouseEntered(MouseEvent e) { }
             @Override
