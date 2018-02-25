@@ -27,7 +27,7 @@ public class Main
                 
         System.out.println("Screen Height: " + pixelHeight); // print the screen's height
         System.out.println("Screen Width: " + pixelWidth); // print the screen's width
-        
+        //edit
         JFrame f = new JFrame("Game Board"); // create new JFrame
         
         MarginComponents margComponents = new MarginComponents(marginSize); // declare the margin components
