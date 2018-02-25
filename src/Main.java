@@ -23,9 +23,7 @@ public class Main extends JFrame
         for (int i = 0; i < maxTilesHeight; i++)
             for (int j = 0; j < maxTilesWidth; j++)
             {
-                mapArray[i][j].setTopLeftX(marginSize + (j * ppi)); // set x coordinate for the top left pixel of the tile
-                mapArray[i][j].setTopLeftY(marginSize + (j * ppi)); // set y coordinate for the top left pixel of the tile
-                mapArray[i][j].setPPI(ppi); // set ppi for the tile
+                mapArray[i][j] = new Tile(ppi, marginSize + (j * ppi), marginSize + (i * ppi));
             }
         
         return mapArray;
