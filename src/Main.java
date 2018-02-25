@@ -9,6 +9,8 @@
  *          William Hopkins
  */
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Main extends JFrame
 {
@@ -31,22 +33,16 @@ public class Main extends JFrame
     // constructor for main - initializes all necessary variables
     public Main()
     {
+        // General parameters
         int screenHeight = (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight();
         int screenWidth = (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth();
         int ppi = java.awt.Toolkit.getDefaultToolkit().getScreenResolution();
         int marginSize = ppi / 4;
         boolean state = false; // False to edit map, true to move tokens
         Tile[][] mapArray = createArray( ppi, screenHeight, screenWidth, marginSize );
-        JFrame f = new JFrame("Game Board");
-        f.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        f.setUndecorated(true); // remove the title bar
-        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // set the JFrame close operation to exit with the X button
-        f.pack();
-        f.addMouseListener(new MouseInput(marginSize, mapArray, ppi, screenHeight, screenWidth)); // add mouse listener
-        f.setVisible(true); // make the board visible
-        Canvas canvas = new Canvas( mapArray );
+        int delay = 500;
         
-        // Draw predetermined grid
+        // Build predetermined grid
         for ( int r = 0; r < mapArray.length; r++ )
         {
             for ( int c = 0; c < mapArray[0].length; c++ )
@@ -61,8 +57,27 @@ public class Main extends JFrame
         }
         mapArray[mapArray.length / 2][mapArray[0].length / 2].setToken( new DnDToken() );
         mapArray[mapArray.length / 2][mapArray[0].length / 2].getToken().setMap("GnomeCircle.png");
-        f.add( canvas );
-        f.repaint();
+        
+        // Determine window settings
+        JFrame f = new JFrame("Game Board");
+        f.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        f.setUndecorated(true); // remove the title bar
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // set the JFrame close operation to exit with the X button
+        f.pack();
+        f.setVisible(true); // make the board visible
+        Canvas canvas = new Canvas( mapArray );
+        f.setContentPane( canvas );
+        f.addMouseListener(new MouseInput(marginSize, mapArray, ppi, screenHeight, screenWidth)); // add mouse listener
+        
+        // Create an instance of an anonymous subclass of ActionListener
+        ActionListener updateTask = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent evt) {
+                f.repaint();
+            }
+        };
+        // Start and run the task at regular delay
+        new Timer(delay, updateTask).start();
     }
     
     public static void main(String[] args)
