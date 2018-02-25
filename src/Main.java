@@ -22,6 +22,8 @@ public class Main
         int pixelWidth = (int) screen.getWidth(); // get the screen's width and cast it to int
         int ppi = java.awt.Toolkit.getDefaultToolkit().getScreenResolution();
         
+        Tile[][] mapArray = CreateArray.createArray();
+        
         TileBorder sqr = new TileBorder(ppi, 20, 20); // test tile
         
         System.out.println("Screen Height: " + pixelHeight); // print the screen's height
@@ -37,4 +39,16 @@ public class Main
         f.setVisible(true); // make the board visible
         f.addMouseListener(new MouseInput()); // add mouse listener
     }
+    
+    public static Tile[][] createArray(int ppi, int screenHeight, int screenWidth)
+    {
+        int marginSize = ppi / 4; // size in pixels of the margins
+        int maxTilesWidth = (screenWidth - (marginSize * 2)) / ppi; // maximum amount of tiles the width of the screen can hold with margins
+        int maxTilesHeight = (screenHeight - (marginSize * 2)) / ppi; // maximum amount of tiles the height of the screen can hold with margins
+        
+        Tile[][] mapArray = new Tile[maxTilesWidth][maxTilesHeight]; // create the 2-dimentional array that holds the info for each tile
+        
+        return mapArray;
+    }
+
 }
