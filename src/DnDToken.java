@@ -1,11 +1,11 @@
 /*
- * Program by: Eric Busch
+ * This class is a specific implementation of Token using DnD (Dungeons and Dragons) rules
  */
 
 public class DnDToken extends Token
 {
-    String name, status;
-    int hp, maxHp;
+    String name, status; // name and status effects
+    int hp, maxHp; // health points and max health
     
     @Override
     public String DisplayStats()

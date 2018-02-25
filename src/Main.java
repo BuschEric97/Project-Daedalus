@@ -13,33 +13,33 @@ import java.awt.event.*;
 
 public class Main extends JFrame
 {
+    // dynamically create the array for the game board and initialize each element
     public static Tile[][] createArray(int ppi, int screenHeight, int screenWidth, int marginSize)
     {
         int maxTilesWidth = (screenWidth - (marginSize * 2)) / ppi; // maximum amount of tiles the width of the screen can hold with margins
         int maxTilesHeight = (screenHeight - (marginSize * 2)) / ppi; // maximum amount of tiles the height of the screen can hold with margins
         
-        Tile[][] mapArray = new Tile[maxTilesHeight][maxTilesWidth]; // create the 2-dimentional array that holds the info for each tile
+        Tile[][] mapArray = new Tile[maxTilesHeight][maxTilesWidth]; // create the 2-dimensional array that holds the info for each tile
         
         for (int i = 0; i < maxTilesHeight; i++)
-            for (int j = 0; j < maxTilesWidth; j++)
+            for (int j = 0; j < maxTilesWidth; j++) // loop through entire 2-dimensional array and initialize each tile with the appropriate coordinates
             {
-                mapArray[i][j] = new Tile(ppi, marginSize + (j * ppi), marginSize + (i * ppi));
+                mapArray[i][j] = new Tile(ppi, marginSize + (j * ppi), marginSize + (i * ppi)); // set ppi as normal and calculate the x & y coordinates for the top left pixel
             }
         
-        return mapArray;
+        return mapArray; // return the created array
     }
     
     // constructor for main - initializes all necessary variables
     public Main()
     {
         // General parameters
-        int screenHeight = (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight();
-        int screenWidth = (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth();
-        int ppi = java.awt.Toolkit.getDefaultToolkit().getScreenResolution();
-        int marginSize = ppi / 4;
+        int screenHeight = (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight(); // screen height in pixels
+        int screenWidth = (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getWidth(); // screen width in pixels
+        int ppi = java.awt.Toolkit.getDefaultToolkit().getScreenResolution(); // ppi - amount of pixels needed to display an inch
+        int marginSize = ppi / 4; // margin around the grid - defined as 1/4 of ppi
         boolean state = false; // False to edit map, true to move tokens
-        Tile[][] mapArray = createArray( ppi, screenHeight, screenWidth, marginSize );
-        int delay = 500;
+        Tile[][] mapArray = createArray( ppi, screenHeight, screenWidth, marginSize ); // create the mapArray
         
         // Build predetermined grid
         for ( int r = 0; r < mapArray.length; r++ )
@@ -55,17 +55,16 @@ public class Main extends JFrame
             }
         }
         mapArray[mapArray.length / 2][mapArray[0].length / 2].setToken( new DnDToken() );
-        mapArray[mapArray.length / 2][mapArray[0].length / 2].getToken().setMap("GnomeCircle.png");
+        mapArray[mapArray.length / 2][mapArray[0].length / 2].getToken().setMap("GnomeCircle.png"); // add test gnome in center of grid
         
         // Determine window settings
-        JFrame f = new JFrame("Game Board");
-        f.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        JFrame f = new JFrame("Game Board"); // define JFrame
+        f.setExtendedState(JFrame.MAXIMIZED_BOTH); // make JFrame maximized
         f.setUndecorated(true); // remove the title bar
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // set the JFrame close operation to exit with the X button
-        f.pack();
         f.setVisible(true); // make the board visible
-        Canvas canvas = new Canvas( mapArray );
-        f.setContentPane( canvas );
+        Canvas canvas = new Canvas( mapArray ); // define a new canvas for drawing the board
+        f.setContentPane( canvas ); // set canvas to the content pane
         
         // Action Listeners
         f.addMouseListener(new MouseInput(marginSize, mapArray, ppi, screenHeight, screenWidth)); // add mouse listener
