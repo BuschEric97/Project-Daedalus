@@ -51,8 +51,9 @@ public class Tile extends JPanel
     {
         ImageIcon icon = null;
         java.net.URL imgURL = getClass().getClassLoader().getResource(s);
-        if ( imgURL != null )
-            icon = new ImageIcon(imgURL);
+        if ( imgURL == null )
+            return;
+        icon = new ImageIcon(imgURL);
         map = icon.getImage();
     }
     public Token getToken()

@@ -28,7 +28,8 @@ public abstract class Token
         ImageIcon icon = null;
         java.net.URL imgURL = getClass().getClassLoader().getResource(s);
         if ( imgURL != null )
-            icon = new ImageIcon(imgURL);
+            return;
+        icon = new ImageIcon(imgURL);
         token = icon.getImage();
     }
     
