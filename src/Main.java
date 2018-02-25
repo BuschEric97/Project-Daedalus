@@ -10,8 +10,6 @@
  */
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.math.*;
 
 public class Main extends JFrame
 {
@@ -21,6 +19,14 @@ public class Main extends JFrame
         int maxTilesHeight = (screenHeight - (marginSize * 2)) / ppi; // maximum amount of tiles the height of the screen can hold with margins
         
         Tile[][] mapArray = new Tile[maxTilesHeight][maxTilesWidth]; // create the 2-dimentional array that holds the info for each tile
+        
+        for (int i = 0; i < maxTilesHeight; i++)
+            for (int j = 0; j < maxTilesWidth; j++)
+            {
+                mapArray[i][j].setTopLeftX(marginSize + (j * ppi)); // set x coordinate for the top left pixel of the tile
+                mapArray[i][j].setTopLeftY(marginSize + (j * ppi)); // set y coordinate for the top left pixel of the tile
+                mapArray[i][j].setPPI(ppi); // set ppi for the tile
+            }
         
         return mapArray;
     }
@@ -38,7 +44,7 @@ public class Main extends JFrame
         f.setUndecorated(true); // remove the title bar
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // set the JFrame close operation to exit with the X button
         f.pack();
-        f.addMouseListener(new MouseInput(marginSize)); // add mouse listener
+        f.addMouseListener(new MouseInput(marginSize, mapArray)); // add mouse listener
         f.setVisible(true); // make the board visible
         Canvas c = new Canvas( mapArray );
         f.add( c );
