@@ -68,15 +68,6 @@ public class Main extends JFrame
         
         // Action Listeners
         f.addMouseListener(new MouseInput(marginSize, mapArray, ppi, screenHeight, screenWidth)); // add mouse listener
-        ActionListener updateTask = new ActionListener() // Create an instance of an anonymous subclass of ActionListener
-        {
-            @Override
-            public void actionPerformed(ActionEvent evt)
-            {
-                f.repaint();
-            }
-        };
-        new Timer(delay, updateTask).start(); // Start and run the task at regular delay
     }
     
     // Mouse listener
@@ -96,6 +87,7 @@ public class Main extends JFrame
         @Override
         public void mouseClicked(MouseEvent me)
         {
+            repaint();
             int mx = me.getX(); // get the X coordinate of the mouse click
             int my = me.getY(); // get the Y coordinate of the mouse click
             int cellWidth; // variable for x coordinate of the cell if the user clicked on the grid
@@ -132,9 +124,8 @@ public class Main extends JFrame
                     else
                         System.err.println("error: target cell is not empty!"); // if target cell is not empty, print an error message
                 }
+                repaint();
             }
-            
-            repaint();
         }
         @Override public void mousePressed(MouseEvent e) { }
         @Override public void mouseReleased(MouseEvent e) { }
