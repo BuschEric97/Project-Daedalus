@@ -17,7 +17,7 @@ public class Main extends JFrame
 {
     int ppi;
     int marginSize;
-    
+    Tile[][] mapArray;
     private DrawCanvas canvas;
     
     public Main()
@@ -57,5 +57,15 @@ public class Main extends JFrame
                new Main(); // Let the constructor do the job
             }
         });
-   }
+    }
+    
+    public static Tile[][] createArray(int ppi, int screenHeight, int screenWidth, int marginSize)
+    {
+        int maxTilesWidth = (screenWidth - (marginSize * 2)) / ppi; // maximum amount of tiles the width of the screen can hold with margins
+        int maxTilesHeight = (screenHeight - (marginSize * 2)) / ppi; // maximum amount of tiles the height of the screen can hold with margins
+        
+        Tile[][] mapArray = new Tile[maxTilesWidth][maxTilesHeight]; // create the 2-dimentional array that holds the info for each tile
+        
+        return mapArray;
+    }
 }
