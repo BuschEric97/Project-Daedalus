@@ -65,5 +65,7 @@ class Canvas extends JPanel
                     marginSize+mapArray.length*ppi); // right line
         g.setColor( Color.RED ); // add the close button
         g.fillRect(0, 0, marginSize, marginSize);
+        g.setColor( Color.BLUE ); // add the add button
+        g.fillRect(0, marginSize, marginSize, marginSize);
     }
 }
