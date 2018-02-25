@@ -26,11 +26,12 @@ public abstract class Token
     public void setMap( String s )
     {
         ImageIcon icon = null;
-        java.net.URL imgURL = getClass().getClassLoader().getResource(s);
-        if ( imgURL != null )
+        java.net.URL imgURL = getClass().getResource(s);
+        if ( imgURL == null )
             return;
         icon = new ImageIcon(imgURL);
         token = icon.getImage();
+        System.out.println(s);
     }
     
     // METHODS
