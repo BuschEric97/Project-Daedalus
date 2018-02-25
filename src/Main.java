@@ -48,6 +48,7 @@ public class Main extends JFrame
         
         // Draw predetermined grid
         for ( int r = 0; r < mapArray.length; r++ )
+        {
             for ( int c = 0; c < mapArray[0].length; c++ )
             {
                 if ( r < mapArray.length / 2 && c < mapArray[0].length / 2 )
@@ -57,6 +58,7 @@ public class Main extends JFrame
                 else
                     mapArray[r][c].setMap("Grass.png");
             }
+        }
         f.add( canvas );
         f.repaint();
     }
