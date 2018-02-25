@@ -59,6 +59,8 @@ public class Main extends JFrame
                     mapArray[r][c].setMap("Grass.png");
             }
         }
+        mapArray[mapArray.length / 2][mapArray[0].length / 2].setToken( new DnDToken() );
+        mapArray[mapArray.length / 2][mapArray[0].length / 2].getToken().setMap("GnomeCircle.png");
         f.add( canvas );
         f.repaint();
     }
