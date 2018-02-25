@@ -10,8 +10,6 @@
  */
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
-import java.math.*;
 
 public class Main extends JFrame
 {
@@ -22,6 +20,16 @@ public class Main extends JFrame
         int maxTilesHeight = (screenHeight - (marginSize * 2)) / ppi; // maximum amount of tiles the height of the screen can hold with margins
         
         Tile[][] mapArray = new Tile[maxTilesHeight][maxTilesWidth]; // create the 2-dimentional array that holds the info for each tile
+        
+        for (int i = 0; i < maxTilesHeight; i++)
+        {
+            for (int j = 0; j < maxTilesWidth; j++)
+            {
+                mapArray[i][j].setTopLeftX(marginSize + (j * ppi)); // set X coordinate of top left corner of tile
+                mapArray[i][j].setTopLeftY(marginSize + (i * ppi)); // set Y coordinate of top left corner of tile
+                mapArray[i][j].setPPI(ppi); // set the width of the mapArray 
+            }
+        }
         
         return mapArray;
     }
