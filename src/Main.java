@@ -38,7 +38,7 @@ public class Main extends JFrame
         f.setUndecorated(true); // remove the title bar
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // set the JFrame close operation to exit with the X button
         f.pack();
-        f.addMouseListener(new MouseInput(marginSize)); // add mouse listener
+        f.addMouseListener(new MouseInput(marginSize, mapArray)); // add mouse listener
         f.setVisible(true); // make the board visible
         Canvas c = new Canvas( mapArray );
         f.add( c );
