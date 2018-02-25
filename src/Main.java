@@ -21,28 +21,30 @@ public class Main
         int pixelHeight = (int) screen.getHeight(); // get the screen's height and cast it to int
         int pixelWidth = (int) screen.getWidth(); // get the screen's width and cast it to int
         int ppi = java.awt.Toolkit.getDefaultToolkit().getScreenResolution();
+        int marginSize = ppi / 4;
         
-        Tile[][] mapArray = CreateArray.createArray();
-        
-        TileBorder sqr = new TileBorder(ppi, 20, 20); // test tile
-        
+        Tile[][] mapArray = createArray(ppi, pixelHeight, pixelWidth, marginSize);
+                
         System.out.println("Screen Height: " + pixelHeight); // print the screen's height
         System.out.println("Screen Width: " + pixelWidth); // print the screen's width
         
         JFrame f = new JFrame("Game Board"); // create new JFrame
         
+        MarginComponents margComponents = new MarginComponents(marginSize); // declare the margin components
+        f.add(margComponents); // add the margin components to the frame
+        
+        Tile sqr = new Tile(ppi, 20, 20); // test tile
         f.add(sqr); // add the test tile to the frame
         
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // set the JFrame close operation to exit with the X button
         f.setSize(pixelWidth, pixelHeight); // set JFrame window size to monitor's size
         f.setUndecorated(true); // remove the title bar
         f.setVisible(true); // make the board visible
-        f.addMouseListener(new MouseInput()); // add mouse listener
+        f.addMouseListener(new MouseInput(marginSize)); // add mouse listener
     }
     
-    public static Tile[][] createArray(int ppi, int screenHeight, int screenWidth)
+    public static Tile[][] createArray(int ppi, int screenHeight, int screenWidth, int marginSize)
     {
-        int marginSize = ppi / 4; // size in pixels of the margins
         int maxTilesWidth = (screenWidth - (marginSize * 2)) / ppi; // maximum amount of tiles the width of the screen can hold with margins
         int maxTilesHeight = (screenHeight - (marginSize * 2)) / ppi; // maximum amount of tiles the height of the screen can hold with margins
         

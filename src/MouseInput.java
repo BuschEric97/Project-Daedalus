@@ -24,6 +24,8 @@ import java.awt.event.MouseListener;
 
 public class MouseInput implements MouseListener
 {
+    int marginSize; // size (in pixels) of the margins around the grid
+    
     @Override
     public void mouseClicked(MouseEvent me)
     {
@@ -31,6 +33,9 @@ public class MouseInput implements MouseListener
         int my = me.getY(); // get the Y coordinate of the mouse click
         
         System.out.println("User clicked at position: (" + mx + ", " + my + ")"); // print coordinates of mouse click
+        
+        if (mx < marginSize && my < marginSize)
+            System.exit(0); // quit the program if the user clicks the red box at the top left of the screen
     }
 
     @Override
@@ -52,4 +57,15 @@ public class MouseInput implements MouseListener
     public void mouseExited(MouseEvent me)
     {
     }
+    
+    MouseInput(int tempMarginSize)
+    {
+        this.marginSize = tempMarginSize;
+    }
+    
+    // getters and setters
+    public void setMarginSize(int temp)
+    { this.marginSize = temp; }
+    public int getMarginSize()
+    { return this.marginSize; }
 }
