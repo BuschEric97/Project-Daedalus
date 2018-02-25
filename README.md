@@ -1,4 +1,4 @@
-*Logo Placeholder*
+![Logo](/img/logoFlag.png)
 # About
 Project Daedalus is an application to simulate a square grid that can be used for various tabletop games. The games currently supported are:
 * Dungeons and Dragons
