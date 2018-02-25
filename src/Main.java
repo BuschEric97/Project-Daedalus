@@ -27,7 +27,7 @@ public class Main extends JFrame
             {
                 mapArray[i][j].setTopLeftX(marginSize + (j * ppi)); // set X coordinate of top left corner of tile
                 mapArray[i][j].setTopLeftY(marginSize + (i * ppi)); // set Y coordinate of top left corner of tile
-                mapArray[i][j].setPPI(ppi); // set the width of the mapArray 
+                mapArray[i][j].setPPI(ppi); // set the width of the mapArray
             }
         }
         
