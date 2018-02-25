@@ -26,6 +26,9 @@ public class MouseInput implements MouseListener
 {
     int marginSize; // size (in pixels) of the margins around the grid
     Tile[][] mapArray; // array with the tiles of the grid
+    int ppi; // size of ppi
+    int screenWidth; // size (in pixels) of screen width
+    int screenHeight; // size (in pixels) of screen height
     
     @Override
     public void mouseClicked(MouseEvent me)
@@ -36,11 +39,13 @@ public class MouseInput implements MouseListener
         if (mx < marginSize && my < marginSize)
             System.exit(0); // quit the program if the user clicks the top left of the screen
         
-        if (mx < marginSize || my < marginSize || mx > marginSize || my > marginSize)
-            System.out.println("User clicked at position: (" + mx + ", " + my + ")"); // print coordinates of mouse click
+        if (mx < marginSize || my < marginSize || mx > (screenWidth - marginSize) || my > (screenHeight - marginSize))
+            System.out.println("User clicked at position: (" + mx + ", " + my + ")"); // print coordinates (in pixels) of mouse click to console
         else
         {
-            
+            int cellWidth = mx / ppi; // use integer division to determine the x coordinate (in the array) of the cell clicked
+            int cellHeight = my / ppi; // use integer division to determine the y coordinate (in the array) of the cell clicked
+            System.out.println("User clicked in cell: (" + cellWidth + ", " + cellHeight + ")"); // print coordinates (in the array) of mouse click to console
         }
     }
 
@@ -65,10 +70,13 @@ public class MouseInput implements MouseListener
     }
     
     // constructor for class - requires marginSize
-    MouseInput(int tempMarginSize, Tile[][] tempMapArray)
+    MouseInput(int tempMarginSize, Tile[][] tempMapArray, int tempPPI, int tempHeight, int tempWidth)
     {
         this.marginSize = tempMarginSize;
         this.mapArray = tempMapArray;
+        this.ppi = tempPPI;
+        this.screenHeight = tempHeight;
+        this.screenWidth = tempWidth;
     }
     
     // getters and setters

@@ -29,6 +29,7 @@ public class Main extends JFrame
         return mapArray;
     }
     
+    // constructor for main - initializes all necessary variables
     public Main()
     {
         int screenHeight = (int)java.awt.Toolkit.getDefaultToolkit().getScreenSize().getHeight();
@@ -42,7 +43,7 @@ public class Main extends JFrame
         f.setUndecorated(true); // remove the title bar
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // set the JFrame close operation to exit with the X button
         f.pack();
-        f.addMouseListener(new MouseInput(marginSize, mapArray)); // add mouse listener
+        f.addMouseListener(new MouseInput(marginSize, mapArray, ppi, screenHeight, screenWidth)); // add mouse listener
         f.setVisible(true); // make the board visible
         Canvas canvas = new Canvas( mapArray );
         for( int r = 0; r < mapArray.length; r++)
