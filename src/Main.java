@@ -77,6 +77,7 @@ public class Main extends JFrame
             g.fillRect(0, screenHeight-marginSize, screenWidth, marginSize);
             g.fillRect(screenWidth-marginSize, 0, marginSize, screenHeight);
             g.setColor( Color.RED );
+            //for( int r = 0; r < mapArray.size(); r ++)
             g.fillRect(0, 0, marginSize, marginSize);
         }
     }
