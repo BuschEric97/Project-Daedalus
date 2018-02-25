@@ -45,9 +45,7 @@ public class Main extends JFrame
         f.addMouseListener(new MouseInput(marginSize, mapArray, ppi, screenHeight, screenWidth)); // add mouse listener
         f.setVisible(true); // make the board visible
         Canvas canvas = new Canvas( mapArray );
-        for( int r = 0; r < mapArray.length; r++)
-            for( int c = 0; c < mapArray[0].length; c++ )
-                mapArray[r][c].setMap("grass.png");
+        // Draw predetermined grid
         f.add( canvas );
         f.repaint();
     }
