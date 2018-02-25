@@ -25,25 +25,16 @@ public class Tile extends JPanel
     int topX; // x coordinate of top left of tile border
     int topY; // y coordinate of top left of tile border
     
-    @Override
- public void paintComponent(Graphics g)
+    // default constructor
+    public Tile()
     {
-        Graphics2D g2 = (Graphics2D) g;
-        super.paintComponent(g2);
-        this.setBackground(Color.WHITE); // background of the tile
-        TileFill(g2,topX,topY);
-        g2.setColor(Color.BLACK); // set the color of the tile border
-        g2.drawRect(this.topX, this.topY, this.ppi, this.ppi); // draw a 1 inch square for the tile
-        g2.drawRect(this.topX + 1, this.topY + 1, this.ppi - 2, this.ppi - 2); // draw another square one pixel smaller to make the border 2 pixels thick
-        
+        this.map = null;
+        this.token = null;
+        this.ppi = 0;
+        this.topX = 0;
+        this.topY = 0;
     }
-    public void TileFill(Graphics2D g2,int x,int y)
-    {
-        ImageIcon icon = new ImageIcon("C:\\Users\\Tyler Eley\\Documents\\NetBeansProjects\\Project-Daedalus\\img\\Grass.png");//Image to be loaded. Feel free to change this
-        Image tileImage = icon.getImage(); 
-        g2.drawImage(tileImage, x, y,this.ppi,this.ppi, this);
-       
-    }
+    
     // constructor for this class - requires ppi and top left corner's coordinates
     public Tile(int tempPPI, int tempX, int tempY)
     {
